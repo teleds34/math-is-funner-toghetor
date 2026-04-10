@@ -4,47 +4,94 @@
     <meta charset="UTF-8">
     <title>Math Homework Helper | Section 4.2</title>
     <style>
-        body { background: #121212; color: #8ba8ca; font-family: sans-serif; text-align: center; margin: 0; }
-        nav { background: #1a1a1a; padding: 20px; border-bottom: 2px solid #8ba8ca; font-weight: bold; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; padding: 30px; max-width: 1000px; margin: auto; }
-        .card { background: #252525; padding: 15px; border-radius: 12px; cursor: pointer; border: 1px solid #333; transition: 0.3s; }
-        .card:hover { border-color: #8ba8ca; transform: translateY(-5px); }
+        body { background: #121212; color: #8ba8ca; font-family: sans-serif; text-align: center; margin: 0; overflow-x: hidden; }
+        nav { background: #1a1a1a; padding: 20px; border-bottom: 2px solid #8ba8ca; font-weight: bold; font-size: 1.2rem; }
+        
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
+            gap: 20px; 
+            padding: 30px; 
+            max-width: 1000px; 
+            margin: auto; 
+        }
+
+        .card { 
+            background: #252525; 
+            padding: 15px; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            border: 1px solid #333; 
+            transition: 0.3s; 
+        }
+
+        .card:hover { border-color: #8ba8ca; transform: translateY(-5px); background: #2a2a2a; }
         .card img { width: 100%; border-radius: 8px; margin-bottom: 10px; }
-        #portal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 100; }
+        .card span { font-weight: bold; display: block; margin-top: 5px; }
+
+        /* The Game Overlay */
+        #portal { 
+            display: none; 
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            background: black; 
+            z-index: 100; 
+        }
+
         iframe { width: 100%; height: 100%; border: none; }
-        .close-btn { position: absolute; top: 15px; right: 20px; background: #8ba8ca; color: black; padding: 5px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+
+        .close-btn { 
+            position: absolute; 
+            top: 15px; 
+            right: 20px; 
+            background: #8ba8ca; 
+            color: black; 
+            padding: 8px 20px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            font-weight: bold;
+            z-index: 101;
+        }
     </style>
 </head>
 <body>
 
-<nav>UNIT 4: RESOURCE PORTAL</nav>
+<nav>UNIT 4: ADVANCED CALCULUS RESOURCES</nav>
 
 <div class="grid">
-    <div class="card" onclick="launch('https://poki.com/en/g/subway-surfers')">
+    <div class="card" onclick="launch('https://education-og.github.io/unblocked-games/subway-surfers/')">
         <img src="https://img.poki.com/cdn-cgi/image/quality=70,width=204,height=204,fit=cover,f=auto/v2/fb30a086884841968840742f56738914.png">
         <span>Assignment 01</span>
     </div>
-    <div class="card" onclick="launch('https://poki.com/en/g/monkey-mart')">
+
+    <div class="card" onclick="launch('https://education-og.github.io/unblocked-games/monkey-mart/')">
         <img src="https://img.poki.com/cdn-cgi/image/quality=70,width=204,height=204,fit=cover,f=auto/v2/75185469493f0b24050965e6f6631863.png">
         <span>Assignment 02</span>
     </div>
 </div>
 
 <div id="portal">
-    <div class="close-btn" onclick="document.getElementById('portal').style.display='none'">CLOSE [X]</div>
-    <iframe id="viewer"></iframe>
+    <div class="close-btn" onclick="closePortal()">CLOSE [X]</div>
+    <iframe id="viewer" src=""></iframe>
 </div>
 
 <script>
-    // We will update this link once your Render proxy is live!
-    const PROXY_URL = "https://ubg76.github.io/subway-surfers/"; 
-
     function launch(url) {
-        const p = document.getElementById('portal');
-        const v = document.getElementById('viewer');
-        // Right now this just loads a fallback game to prove it works
-        v.src = PROXY_URL; 
-        p.style.display = 'block';
+        const portal = document.getElementById('portal');
+        const viewer = document.getElementById('viewer');
+        
+        // This takes the URL from the card and puts it in the iframe
+        viewer.src = url;
+        portal.style.display = 'block';
+    }
+
+    function closePortal() {
+        const portal = document.getElementById('portal');
+        const viewer = document.getElementById('viewer');
+        
+        portal.style.display = 'none';
+        viewer.src = ""; // Stops the game music/sound when closed
     }
 </script>
 
