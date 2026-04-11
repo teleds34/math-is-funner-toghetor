@@ -77,21 +77,23 @@
 </div>
 
 <script>
-    function launch(url) {
-        const portal = document.getElementById('portal');
-        const viewer = document.getElementById('viewer');
+    // 1. PASTE YOUR VERCEL LINK HERE (Important: Keep the /uv/service/ at the end)
+    const PROXY_SERVER = "https://ultraviolet-static-opal.vercel.app/uv/service/";
+
+    function launch(targetUrl) {
+        const p = document.getElementById('portal');
+        const v = document.getElementById('viewer');
         
-        // This takes the URL from the card and puts it in the iframe
-        viewer.src = url;
-        portal.style.display = 'block';
+        // This encodes the URL so it bypasses school filters
+        const encodedUrl = btoa(targetUrl).replace(/\//g, '_').replace(/\+/g, '-').replace(/=/g, '');
+        
+        v.src = PROXY_SERVER + encodedUrl;
+        p.style.display = 'block';
     }
 
     function closePortal() {
-        const portal = document.getElementById('portal');
-        const viewer = document.getElementById('viewer');
-        
-        portal.style.display = 'none';
-        viewer.src = ""; // Stops the game music/sound when closed
+        document.getElementById('portal').style.display = 'none';
+        document.getElementById('viewer').src = "";
     }
 </script>
 
