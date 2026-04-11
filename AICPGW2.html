@@ -60,7 +60,7 @@
 <nav>UNIT 4: ADVANCED CALCULUS RESOURCES</nav>
 
 <div class="grid">
-    <div class="card" onclick="launch('https://education-og.github.io/unblocked-games/subway-surfers/')">
+   <div class="card" onclick="launch('https://subway-surfers.org/')">
         <img src="https://img.poki.com/cdn-cgi/image/quality=70,width=204,height=204,fit=cover,f=auto/v2/fb30a086884841968840742f56738914.png">
         <span>Assignment 01</span>
     </div>
@@ -78,13 +78,15 @@
     <script src="https://ultraviolet-static-opal.vercel.app/uv/uv.bundle.js"></script>
 <script src="https://ultraviolet-static-opal.vercel.app/uv/uv.config.js"></script>
 
+<script src="https://ultraviolet-static-opal.vercel.app/uv/uv.bundle.js"></script>
+<script src="https://ultraviolet-static-opal.vercel.app/uv/uv.config.js"></script>
+
 <script>
     function launch(targetUrl) {
         const p = document.getElementById('portal');
         const v = document.getElementById('viewer');
         
-        // This is the "Magic Handshake"
-        // It uses the instructions we just imported from Vercel
+        // This is the "Magic Key" that tells Vercel what to fetch
         const encodedUrl = __uv$config.prefix + __uv$config.encodeUrl(targetUrl);
         v.src = "https://ultraviolet-static-opal.vercel.app" + encodedUrl;
         
@@ -96,6 +98,5 @@
         document.getElementById('viewer').src = "";
     }
 </script>
-
 </body>
 </html>
