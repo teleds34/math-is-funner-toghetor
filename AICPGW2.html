@@ -75,18 +75,22 @@
     <div class="close-btn" onclick="closePortal()">CLOSE [X]</div>
     <iframe id="viewer" src=""></iframe>
 </div>
+    
+<script src="https://ultraviolet-static-opal.vercel.app/uv/uv.config.js"></script>
 
 <script>
-    // 1. PASTE YOUR VERCEL LINK HERE (Important: Keep the /uv/service/ at the end)
-    const PROXY_SERVER = "https://ultraviolet-static-opal.vercel.app/static/uv/service/";
+    // This is the correct path for the Vercel version you have
+    const PROXY_SERVER = "https://ultraviolet-static-opal.vercel.app/uv/service/";
+
     function launch(targetUrl) {
         const p = document.getElementById('portal');
         const v = document.getElementById('viewer');
         
-        // This encodes the URL so it bypasses school filters
-        const encodedUrl = btoa(targetUrl).replace(/\//g, '_').replace(/\+/g, '-').replace(/=/g, '');
+        // Ultraviolet requires a specific encoding called XOR for some versions
+        // But let's try the standard way first since your engine is "A"
+        const encodedUrl = __uv$config.encodeUrl(targetUrl);
         
-        v.src = PROXY_SERVER + encodedUrl;
+        v.src = "https://ultraviolet-static-opal.vercel.app/uv/service/" + encodedUrl;
         p.style.display = 'block';
     }
 
