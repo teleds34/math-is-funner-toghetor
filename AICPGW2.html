@@ -26,7 +26,7 @@
         }
 
         .card:hover { border-color: #8ba8ca; transform: translateY(-5px); background: #2a2a2a; }
-        .card img { width: 100%; border-radius: 8px; margin-bottom: 10px; }
+        .card img { width: 100%; border-radius: 8px; margin-bottom: 10px; pointer-events: none; }
         .card span { font-weight: bold; display: block; margin-top: 5px; }
 
         /* The Game Overlay */
@@ -60,12 +60,12 @@
 <nav>UNIT 4: ADVANCED CALCULUS RESOURCES</nav>
 
 <div class="grid">
-   <div class="card" onclick="launch('https://subway-surfers.org/')">
+    <div class="card" onclick="launch('https://subway-surfers.org/')">
         <img src="https://img.poki.com/cdn-cgi/image/quality=70,width=204,height=204,fit=cover,f=auto/v2/fb30a086884841968840742f56738914.png">
         <span>Assignment 01</span>
     </div>
 
-    <div class="card" onclick="launch('https://education-og.github.io/unblocked-games/monkey-mart/')">
+    <div class="card" onclick="launch('https://monkeymart.org/')">
         <img src="https://img.poki.com/cdn-cgi/image/quality=70,width=204,height=204,fit=cover,f=auto/v2/75185469493f0b24050965e6f6631863.png">
         <span>Assignment 02</span>
     </div>
@@ -75,8 +75,6 @@
     <div class="close-btn" onclick="closePortal()">CLOSE [X]</div>
     <iframe id="viewer" src=""></iframe>
 </div>
-    <script src="https://ultraviolet-static-opal.vercel.app/uv/uv.bundle.js"></script>
-<script src="https://ultraviolet-static-opal.vercel.app/uv/uv.config.js"></script>
 
 <script src="https://ultraviolet-static-opal.vercel.app/uv/uv.bundle.js"></script>
 <script src="https://ultraviolet-static-opal.vercel.app/uv/uv.config.js"></script>
@@ -86,11 +84,15 @@
         const p = document.getElementById('portal');
         const v = document.getElementById('viewer');
         
-        // This is the "Magic Key" that tells Vercel what to fetch
-        const encodedUrl = __uv$config.prefix + __uv$config.encodeUrl(targetUrl);
-        v.src = "https://ultraviolet-static-opal.vercel.app" + encodedUrl;
-        
-        p.style.display = 'block';
+        // Safety check to make sure the proxy scripts loaded
+        if (typeof __uv$config !== 'undefined') {
+            const encodedUrl = __uv$config.prefix + __uv$config.encodeUrl(targetUrl);
+            v.src = "https://ultraviolet-static-opal.vercel.app" + encodedUrl;
+            p.style.display = 'block';
+        } else {
+            console.error("Proxy scripts not loaded yet.");
+            alert("Connecting to server... please wait 3 seconds and click again.");
+        }
     }
 
     function closePortal() {
@@ -98,5 +100,6 @@
         document.getElementById('viewer').src = "";
     }
 </script>
+
 </body>
 </html>
